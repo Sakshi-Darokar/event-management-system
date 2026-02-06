@@ -1,36 +1,22 @@
-package com.ems.backend.entity;
+package com.ems.backend.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-@Table(name = "events")
-public class Event {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EventResponse {
     private Long id;
-
     private String eventName;
-
-    @Column(length = 1000)
     private String description;
-
     private LocalDateTime dateTime;
-
     private String location;
-
     private double price;
-
     private int totalSeats;
-
     private int availableSeats;
-
     private String category;
 }
+
+// oye dil lagaya
