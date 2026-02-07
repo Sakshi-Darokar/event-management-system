@@ -32,6 +32,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.updateEvent(id, request));
     }
 
+
     // Admin
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteEvent(@PathVariable Long id) {
