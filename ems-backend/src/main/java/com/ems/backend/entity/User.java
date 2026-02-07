@@ -1,6 +1,5 @@
 package com.ems.backend.entity;
 
-import com.ems.backend.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,5 +23,5 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private com.ems.backend.enums.Role role;
 }

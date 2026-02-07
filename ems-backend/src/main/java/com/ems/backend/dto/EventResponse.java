@@ -18,5 +18,3 @@ public class EventResponse {
     private int availableSeats;
     private String category;
 }
-
-// oye dil lagaya
