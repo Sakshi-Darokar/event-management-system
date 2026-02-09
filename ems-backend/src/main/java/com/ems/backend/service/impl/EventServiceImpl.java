@@ -1,11 +1,13 @@
 package com.ems.backend.service.impl;
 
+
 import com.ems.backend.dto.EventRequest;
 import com.ems.backend.dto.EventResponse;
 import com.ems.backend.entity.Event;
 import com.ems.backend.repository.EventRepository;
 import com.ems.backend.service.EventService;
 import org.springframework.stereotype.Service;
+import com.ems.backend.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -54,7 +56,8 @@ public class EventServiceImpl implements EventService {
     public EventResponse updateEvent(Long id, EventRequest request) {
 
         Event event = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
+
 
         event.setEventName(request.getEventName());
         event.setDescription(request.getDescription());
@@ -77,7 +80,8 @@ public class EventServiceImpl implements EventService {
     public String deleteEvent(Long id) {
 
         Event event = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
+
 
         eventRepository.delete(event);
 
@@ -96,7 +100,8 @@ public class EventServiceImpl implements EventService {
     public EventResponse getEventById(Long id) {
 
         Event event = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
+
 
         return mapToResponse(event);
     }
