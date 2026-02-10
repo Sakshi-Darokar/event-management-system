@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import API from "../api/api";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,13 +12,7 @@ function Login() {
     API.post("/auth/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("role", res.data.role);
-
-        if (res.data.role === "ADMIN") {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/user-dashboard");
-        }
+        setMessage("Login successful");
       })
       .catch(() => {
         setMessage("Invalid email or password");
