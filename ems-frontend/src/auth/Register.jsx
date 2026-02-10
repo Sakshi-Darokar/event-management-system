@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import API from "../api/api";
 
 function Register() {
@@ -8,18 +7,18 @@ function Register() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("USER");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    API.post("/auth/register", { name, email, password, role })
+    API.post("/auth/register", {
+      name,
+      email,
+      password,
+      role
+    })
       .then(() => {
-        if (role === "ADMIN") {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/user-dashboard");
-        }
+        setMessage("Registration successful");
       })
       .catch(() => {
         setMessage("Registration failed");
