@@ -2,6 +2,7 @@ package com.ems.backend.controller;
 
 import com.ems.backend.service.BookingService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,23 +16,27 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
+
     @PostMapping("/register")
     public ResponseEntity<String> register(
-            @RequestParam Long userId,
-            @RequestParam Long eventId) {
-
+            Authentication authentication,
+            @RequestParam Long eventId
+    ) {
+        String email = authentication.getName();
         return ResponseEntity.ok(
-                bookingService.registerForEvent(userId, eventId)
+                bookingService.registerForEvent(email, eventId)
         );
     }
 
+
     @DeleteMapping("/cancel")
     public ResponseEntity<String> cancel(
-            @RequestParam Long userId,
-            @RequestParam Long eventId) {
-
+            Authentication authentication,
+            @RequestParam Long eventId
+    ) {
+        String email = authentication.getName();
         return ResponseEntity.ok(
-                bookingService.cancelBooking(userId, eventId)
+                bookingService.cancelBooking(email, eventId)
         );
     }
 }

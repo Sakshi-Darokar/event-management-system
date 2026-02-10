@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .requestMatchers("/booking/**").hasAnyRole("USER", "ADMIN")
 
                         // ADMIN only
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/events/create").hasRole("ADMIN")
                         .requestMatchers("/events/update/**").hasRole("ADMIN")
                         .requestMatchers("/events/delete/**").hasRole("ADMIN")

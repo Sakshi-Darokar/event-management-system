@@ -14,18 +14,20 @@ public class BookingServiceImpl implements BookingService {
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
 
-    public BookingServiceImpl(BookingRepository bookingRepository,
-                              UserRepository userRepository,
-                              EventRepository eventRepository) {
+    public BookingServiceImpl(
+            BookingRepository bookingRepository,
+            UserRepository userRepository,
+            EventRepository eventRepository
+    ) {
         this.bookingRepository = bookingRepository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
     }
 
     @Override
-    public String registerForEvent(Long userId, Long eventId) {
+    public String registerForEvent(String email, Long eventId) {
 
-        User user = userRepository.findById(userId)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Event event = eventRepository.findById(eventId)
@@ -36,12 +38,11 @@ public class BookingServiceImpl implements BookingService {
             throw new RuntimeException("You already booked this event");
         }
 
-        // Seat availability check
+        // Seat availability
         if (event.getAvailableSeats() <= 0) {
             throw new RuntimeException("No seats available");
         }
 
-        // Reduce seat
         event.setAvailableSeats(event.getAvailableSeats() - 1);
         eventRepository.save(event);
 
@@ -49,16 +50,15 @@ public class BookingServiceImpl implements BookingService {
         booking.setUser(user);
         booking.setEvent(event);
         booking.setBookingDate(LocalDateTime.now());
-
         bookingRepository.save(booking);
 
         return "Event booked successfully";
     }
 
     @Override
-    public String cancelBooking(Long userId, Long eventId) {
+    public String cancelBooking(String email, Long eventId) {
 
-        User user = userRepository.findById(userId)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Event event = eventRepository.findById(eventId)
@@ -70,7 +70,6 @@ public class BookingServiceImpl implements BookingService {
 
         bookingRepository.delete(booking);
 
-        // Increase seat
         event.setAvailableSeats(event.getAvailableSeats() + 1);
         eventRepository.save(event);
 

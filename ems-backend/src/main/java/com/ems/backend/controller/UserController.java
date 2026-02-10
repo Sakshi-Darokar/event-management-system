@@ -5,6 +5,7 @@ import com.ems.backend.dto.UserProfileResponse;
 import com.ems.backend.entity.Event;
 import com.ems.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,22 +21,27 @@ public class UserController {
         this.userService = userService;
     }
 
-    // TEMP: email query se "current user" simulate
+    // ✅ GET CURRENT USER PROFILE (JWT based)
     @GetMapping("/me")
-    public ResponseEntity<UserProfileResponse> me(@RequestParam String email) {
+    public ResponseEntity<UserProfileResponse> me(Authentication authentication) {
+        String email = authentication.getName();
         return ResponseEntity.ok(userService.getProfileByEmail(email));
     }
 
+    // ✅ UPDATE PROFILE (JWT based)
     @PutMapping("/update")
     public ResponseEntity<UserProfileResponse> update(
-            @RequestParam String email,
+            Authentication authentication,
             @RequestBody UpdateUserRequest request
     ) {
+        String email = authentication.getName();
         return ResponseEntity.ok(userService.updateProfileByEmail(email, request));
     }
 
+    // ✅ MY EVENTS (JWT based)
     @GetMapping("/my-events")
-    public ResponseEntity<List<Event>> myEvents(@RequestParam String email) {
+    public ResponseEntity<List<Event>> myEvents(Authentication authentication) {
+        String email = authentication.getName();
         return ResponseEntity.ok(userService.getMyEventsByEmail(email));
     }
 }
