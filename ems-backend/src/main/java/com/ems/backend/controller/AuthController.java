@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin
@@ -48,8 +50,14 @@ public class AuthController {
         String token = jwtUtil.generateToken(user.getEmail());
 
         return ResponseEntity.ok(
-                new LoginResponse("Login successful", token)
+                new LoginResponse(
+                        token,
+                        user.getRole().name(),
+                        "Login successful"
+                )
         );
+
+
 
     }
 }

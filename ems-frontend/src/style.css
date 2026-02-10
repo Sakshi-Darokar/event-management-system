@@ -1,0 +1,125 @@
+/* ===== Home Page ===== */
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-card {
+  background-color: white;
+  padding: 40px;
+  width: 420px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.home-card h1 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.home-card p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.home-buttons button {
+  width: 120px;
+  padding: 10px;
+  margin: 0 10px;
+  font-size: 15px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.home-buttons button:hover {
+  background-color: #0d47a1;
+}
+
+/* ===== Global ===== */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(120deg, #89f7fe, #66a6ff);
+  min-height: 100vh;
+}
+
+/* ===== Home Page ===== */
+.home-container {
+  text-align: center;
+  margin-top: 120px;
+}
+
+.home-container h1 {
+  font-size: 32px;
+  color: #333;
+}
+
+.home-container p {
+  margin-bottom: 30px;
+}
+
+.home-buttons button {
+  padding: 12px 22px;
+  margin: 0 10px;
+  font-size: 15px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.home-buttons button:hover {
+  background-color: #0d47a1;
+}
+
+/* ===== Login & Register ===== */
+.auth-container {
+  width: 340px;
+  margin: 90px auto;
+  padding: 25px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-container input,
+.auth-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #0d47a1;
+}
+
+.auth-container p {
+  text-align: center;
+  margin-top: 10px;
+  color: green;
+}
