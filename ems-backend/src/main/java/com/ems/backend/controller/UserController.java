@@ -21,14 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    // ✅ GET CURRENT USER PROFILE (JWT based)
+
     @GetMapping("/me")
     public ResponseEntity<UserProfileResponse> me(Authentication authentication) {
         String email = authentication.getName();
         return ResponseEntity.ok(userService.getProfileByEmail(email));
     }
 
-    // ✅ UPDATE PROFILE (JWT based)
+
     @PutMapping("/update")
     public ResponseEntity<UserProfileResponse> update(
             Authentication authentication,
@@ -38,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok(userService.updateProfileByEmail(email, request));
     }
 
-    // ✅ MY EVENTS (JWT based)
+
     @GetMapping("/my-events")
     public ResponseEntity<List<Event>> myEvents(Authentication authentication) {
         String email = authentication.getName();
